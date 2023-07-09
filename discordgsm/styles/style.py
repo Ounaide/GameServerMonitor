@@ -81,7 +81,7 @@ class Style(ABC):
         if self.server.game_id == 'discord' and self.server.result['connect']:
             style_data['description'] = t('embed.description.instant_invite', self.locale).format(url=self.server.result['connect'])
         elif gamedig.default_port(self.server.game_id) == 27015 and gamedig.game_port(self.server.result) == int(self.server.query_port):
-            style_data['description'] = t('embed.description.connect', self.locale).format(url=f'steam://connect/{self.server.address}:{self.server.query_port}')
+            style_data['description'] = t('embed.description.connect', self.locale).format(url=f'https://ugc.gs/steam.php?addr={self.server.address}:{self.server.query_port}')
 
         try:
             async with aiohttp.ClientSession() as session:
@@ -115,7 +115,7 @@ class Style(ABC):
     def add_address_field(self, embed: Embed):
         game_port = gamedig.game_port(self.server.result)
 
-        if self.server.game_id == 'discord':
+        if self.server.game_id == 'discord': #this is the part to change if need be
             name = t('modal.text_input.guild_id.label', self.locale)
             embed.add_field(name=name, value=f'`{self.server.address}`', inline=True)
         elif game_port is None or game_port == int(self.server.query_port):
