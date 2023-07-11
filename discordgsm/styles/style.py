@@ -146,8 +146,9 @@ class Style(ABC):
         time_format = '%Y-%m-%d %I:%M:%S%p' if int(self.server.style_data.get('clock_format', '12')) == 12 else '%Y-%m-%d %H:%M:%S'
         last_update = datetime.now(tz=tz(self.server.style_data.get('timezone', 'Etc/UTC'))).strftime(time_format)
         last_update = t('embed.field.footer.last_update', self.locale).format(last_update=last_update)
-        icon_url = 'https://avatars.githubusercontent.com/u/61296017'
-        embed.set_footer(text=f'DiscordGSM {__version__} | {advertisement} | {last_update}', icon_url=icon_url)
+        #icon_url = 'https://avatars.githubusercontent.com/u/61296017'
+        icon_url = 'https://vipabuse.ounaide.repl.co/static/ugc_logo.png'
+        embed.set_footer(text='', icon_url=icon_url)
 
     def set_image_and_thumbnail(self, embed: Embed):
         image_url = self.server.style_data.get('image_url', '')
